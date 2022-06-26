@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  {% include 'head.html' %}
+
+  <body>
+    {% include 'nav_bar.html' %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="container-fluid">
+          <div class="row justify-content-center mt-2">
+            <div
+              class="col-md-4 col-4 d-flex justify-content-center align-content-center"
+            >
+              <form
+                class="d-flex justify-content-center align-content-center"
+                method="get"
+                action="{{ url_for('production.index_date', date=prev_date) }}"
+              >
+                <button type="submit" class="btn btn-light">
+                  <i class="bi bi-arrow-bar-left"></i>
+                </button>
+              </form>
+            </div>
+
+            <div
+              class="col-md-4 col-4 d-flex justify-content-center align-content-center"
+            >
+              <div class="alert alert-primary mb-0" role="alert">{{date}}</div>
+            </div>
+            <div class="col-md-4 col-4 d-flex justify-content-center">
+              <form
+                class="d-flex justify-content-center align-content-center"
+                method="get"
+                action="{{ url_for('production.index_date', date=next_date) }}"
+              >
+                <button type="submit" class="btn btn-light">
+                  <i class="bi bi-arrow-bar-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 mt-2">
+          <div class="alert alert-warning my-3" role="alert">En cours</div>
+
+          {% for worker in workers_pending%}
+          <form
+            method="POST"
+            action="{{ url_for('production.post_worker', date=date, worker_id=worker.id) }}"
+          >
+            <div id="worker_{{worker.id}}" class="card p-2 m-2">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-md-4">
+                  <div>💪🏻 {{worker.last_name}} {{worker.first_name}}</div>
+                </div>
+                <div class="col-md-4">
+                  <select
+                    onchange='changeSelected(this.value, "{{worker.id}}", {{config | tojson}})'
+                    class="form-select"
+                    name="task"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Travail réalisé</option>
+                    {% for task in config.tasks %}
+                    <option value="{{task.id}}">
+                      {{task.icon}} {{task.name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+          {% endfor %}
+        </div>
+        <div class="col-md-5 mt-2">
+          <div class="alert alert-success my-3" role="alert">Terminés</div>
+
+          {% for worker in workers_done%}
+          <form method="POST">
+            <div id="worker_{{worker.id}}" class="card p-2 m-2">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-md-4">
+                  <div>{{worker.first_name}} {{worker.last_name}}</div>
+                </div>
+                <div class="col-md-4">
+                  <select
+                    onchange='changeSelected(this.value, "{{worker.id}}", {{config | tojson}})'
+                    class="form-select"
+                    name="task"
+                    aria-label="Default select example"
+                    hidden
+                  >
+                    <option selected>Travail réalisé</option>
+                    {% for task in config.tasks %}
+                    <option value="{{task.id}}">{{task.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function changeSelected(x, worker_id, config) {
+        console.log(x);
+        console.log(worker_id);
+
+        card = document.getElementById("worker_" + worker_id);
+
+        task = config.tasks.find((task) => task.id == x);
+
+        if (document.getElementById("card_div") == null) {
+          var card_div = document.createElement("div");
+          card_div.id = "card_div";
+        } else {
+          var card_div = document.getElementById("card_div");
+          card_div.innerHTML = "";
+        }
+
+        task.inputs.forEach((input) => {
+          console.log(input);
+          card_div.appendChild(inputElement(input));
+        });
+
+        var validate = document.createElement("button");
+        validate.classList.add("btn", "btn-info", "m-4");
+        validate.innerHTML = "✅ Enregistrer";
+        validate.setAttribute("type", "submit");
+        card_div.appendChild(validate);
+
+        card.appendChild(card_div);
+      }
+
+      function getInput(type) {
+        var input_casse = document.createElement("div");
+
+        var input = document.createElement("input");
+
+        input.setAttribute("type", "number");
+        input.classList.add("form-control");
+        input.setAttribute("name", type);
+        input.setAttribute("step", "0.01");
+        input.required = true;
+        input_casse.appendChild(input);
+        return input_casse;
+      }
+
+      function inputElement(element) {
+        var el_infos = document.createElement("div");
+        el_infos.classList.add("m-4");
+        var el_title = document.createElement("div");
+        el_title.classList.add("alert", "alert-danger");
+        el_title.setAttribute("role", "alert");
+
+        el_title.innerHTML += element.icon + " " + element.name;
+
+        el_title.classList.add("alert", "alert-primary");
+
+        el_infos.appendChild(el_title);
+
+        switch (element.type) {
+          case "loose":
+            var el_body = createSimpleInput(element.type, element.unit);
+            break;
+          case "weight":
+            var el_body = createWeightInput(element.id);
+
+            break;
+          case "time":
+            var el_body = createSimpleInput(element.type, element.unit);
+            break;
+        }
+        el_infos.appendChild(el_body);
+        return el_infos;
+      }
+
+      function createSimpleInput(type, unit) {
+        var row = document.createElement("div");
+        row.classList.add(
+          "row",
+          "justify-content-center",
+          "align-items-center"
+        );
+        var col_1 = document.createElement("div");
+        col_1.classList.add("col-md-4");
+        col_1.classList.add("col-6");
+
+        var col_2 = document.createElement("div");
+        col_2.classList.add("col-md-6");
+        col_2.classList.add("col-6");
+
+        var work = getInput(type);
+        col_1.append(work);
+        col_2.innerHTML = unit;
+        row.appendChild(col_1);
+        row.appendChild(col_2);
+        return row;
+      }
+
+      function createWeightInput(id_weight) {
+        var row = document.createElement("div");
+        var centimeters = ["14 centimètres", "19 centimètres"];
+        var centimeter_ids = ["short", "long"];
+        var diameters = ["5-8 mm", "8+ mm"];
+        var diameter_ids = ["thin", "thick"];
+        row.classList.add("row", "justify-content-around");
+
+        for (var i = 0; i < 2; i++) {
+          var col_main = document.createElement("div");
+          col_main.classList.add(
+            "col-md-5",
+            "align-items-center",
+            "justify-content-center",
+            "border",
+            "rounded",
+            "p-2"
+          );
+          var span = document.createElement("span");
+          span.classList.add("badge", "bg-primary");
+          span.innerHTML = centimeters[i];
+
+          var second_row = document.createElement("div");
+          second_row.classList.add(
+            "row",
+            "md-5",
+            "justify-content-center",
+            "mt-2"
+          );
+          for (var j = 0; j < 2; j++) {
+            var third_row_1 = document.createElement("div");
+            third_row_1.classList.add("col-md-6");
+            var input1 = document.createElement("input");
+            input1.setAttribute("type", "number");
+            input1.classList.add("form-control");
+            input1.setAttribute("placeholder", diameters[j]);
+            input1.setAttribute("step", "0.01");
+            input1.required = true;
+            input1.setAttribute(
+              "name",
+              id_weight +
+                "[" +
+                centimeter_ids[i] +
+                "]" +
+                "[" +
+                diameter_ids[j] +
+                "]"
+            );
+
+            third_row_1.appendChild(input1);
+            second_row.appendChild(third_row_1);
+          }
+          col_main.appendChild(span);
+          col_main.appendChild(second_row);
+          row.appendChild(col_main);
+        }
+
+        return row;
+      }
+    </script>
+  </body>
+</html>

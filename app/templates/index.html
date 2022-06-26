@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  {% include 'head.html' %}
+
+  <body>
+    {% include 'nav_bar.html' %}
+    <div class="container-fluid">
+      <div class="row d-flex justify-content-center justify-content-center">
+        <div class="col-md-2">
+          <div class="card mt-4">
+            <div class="card-body">
+              <a
+                href="{{ url_for('production.index') }}"
+                style="
+                  text-decoration: none;
+                  color: black;
+                  text-decoration-color: none;
+                  text-decoration-style: none;
+                "
+                class="d-flex stretched-link justify-content-center"
+              >
+                👷‍♀️ Production 👷‍♀️
+              </a>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-body">
+              <div class="card-title d-flex justify-content-center m-0"></div>
+              <a
+                href="{{ url_for('workers.index') }}"
+                style="
+                  text-decoration: none;
+                  color: black;
+                  text-decoration-color: none;
+                  text-decoration-style: none;
+                "
+                class="d-flex stretched-link justify-content-center"
+                >👨 Opérateurs 🤵‍♀️</a
+              >
+            </div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-body">
+              <a
+                href="#"
+                style="
+                  text-decoration: none;
+                  color: black;
+                  text-decoration-color: none;
+                  text-decoration-style: none;
+                "
+                class="d-flex stretched-link justify-content-center"
+                >📈 Statistiques 📈</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

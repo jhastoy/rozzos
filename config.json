@@ -1,0 +1,146 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "coupe",
+            "name": "Coupe",
+            "icon": "✂️",
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps de travail",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_coupe",
+                    "name": "Poids coupé",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "casse": true,
+            "type": "ecouvillonage",
+            "name": "Écouvillonnage",
+            "icon": "🎋",
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps de travail",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount",
+                    "name": "Casse",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_ecouvilloné",
+                    "name": "Poids écouvillé",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "type": "lavage",
+            "casse": true,
+            "name": "Lavage",
+            "icon": "💦",
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps de travail",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount",
+                    "name": "Casse",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_lavé",
+                    "name": "Poids lavé",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "type": "tri",
+            "casse": false,
+            "icon": "🔎",
+            "name": "Tri qualité",
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps de travail",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "id": "poids_trie",
+                    "type": "weight",
+                    "name": "Poids trié",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_finition",
+                    "name": "Poids en finition",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "type": "finition",
+            "name": "Finition",
+            "icon": "💎",
+            "casse": true,
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps de travail",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount",
+                    "name": "Casse",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_termine",
+                    "name": "Poids terminé",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        }
+    ]
+}

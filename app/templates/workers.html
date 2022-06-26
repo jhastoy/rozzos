@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  {% include 'head.html' %}
+
+  <body>
+    {% include 'nav_bar.html' %}
+    <div class="container-fluid mt-2">
+      <div class="row d-flex justify-content-center justify-content-center">
+        <div class="col-md-4">
+          <div class="alert alert-warning" role="alert">Opérateurs</div>
+
+          {% for worker in workers%}
+          <div class="card mt-2">
+            <div class="row align-items-center">
+              <div class="col-md-8 col-8">
+                <div class="p-2 justify-content-center align-items-center">
+                  💪🏻 {{worker.last_name}} {{worker.first_name}}
+                </div>
+              </div>
+              <div class="col-md-4 col-4">
+                <div class="p-2 justify-content-center align-items-center">
+                  <form
+                    id="delete"
+                    method="POST"
+                    action="{{url_for('workers.delete', worker_id=worker.id)}}"
+                  >
+                    <button form="delete" type="submit" class="btn btn-danger">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-4 px-2">
+          <div class="alert alert-warning" role="alert">Ajouter</div>
+          <form method="POST" href="#">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-5 mt-2">
+                <input
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Nom"
+                  name="last_name"
+                />
+              </div>
+              <div class="col-md-5 mt-2">
+                <input
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Prénom"
+                  name="first_name"
+                />
+              </div>
+            </div>
+            <div
+              class="row justify-content-center align-items-center mt-2 px-5"
+            >
+              <input accept="image/*" type="file" class="form-control" />
+            </div>
+            <div
+              class="row justify-content-center align-items-center mt-2 px-5"
+            >
+              <button class="btn btn-secondary" type="submit">
+                ✅ Ajouter
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+.navbar {
+  background-color: white;
+  background-image: url("images/background.png");
+
+  background-repeat: repeat;
+  background-size: 30%;
+}
+body {
+  background-color: #bccebe;
+}
+#date {
+  background-color: #dbcdab;
+}
+#logo {
+  background-color: white;
+  width: 60px;
+  border-radius: 25px;
+}
