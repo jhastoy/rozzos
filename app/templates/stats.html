@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  {% include 'head.html' %}
+
+  <body>
+    {% include 'nav_bar.html' %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 mt-2 position-fixed">
+          <div class="row mt-2">
+            <h5>Filtres</h5>
+          </div>
+          <label for="start_date">Date de début</label>
+
+          <div class="row p-1">
+            <input
+              type="date"
+              id="start_date"
+              onchange="updateStartDate(this.value)"
+              class="form-control"
+            />
+            <script>
+              var input = document.getElementById('start_date');
+              input.value = moment().subtract(7, 'days').format('YYYY-MM-DD');
+            </script>
+            <label class="mt-2" for="end_date">Date de fin</label>
+
+            <input
+              type="date"
+              id="end_date"
+              name="trip-start"
+              onchange="updateEndDate(this.value)"
+              class="form-control"
+            />
+            <script>
+              var input = document.getElementById('end_date');
+              input.value = moment().format('YYYY-MM-DD');
+            </script>
+          </div>
+        </div>
+        <div class="col-md-2 mt-2 rounded" style="background-color: white">
+          <div class="container-fluid"></div>
+        </div>
+        <div class="col-md-10 mt-2">
+          <div class="overflow-scroll">
+            {% for task in data %}
+            <div class="row">
+              <div class="alert alert-primary" role="alert">
+                {{ task.icon }} {{task.name}}
+              </div>
+              {% for input in task.inputs %}
+
+              <div class="col-md-6">
+                <div class="row">
+                  <canvas
+                    id="chart_{{task.id}}_{{input.id}}"
+                    style="width: 40%; height: 50%"
+                  ></canvas>
+                  <script>
+                    var datasets = JSON.parse(
+                      '{{ input.datasets | tojson | safe}}'
+                    );
+                    datasets.forEach((dataset) => {
+                      dataset.backgroundColor = randomColor({
+                        luminosity: 'light',
+                        format: 'rgba',
+                        alpha: 0.8,
+                      });
+                    });
+
+                    console.log(datasets);
+                    var ctx = document
+                      .getElementById('chart_{{task.id}}_{{input.id}}')
+                      .getContext('2d');
+                    var chart = new Chart(ctx, {
+                      type: 'bar',
+                      options: {
+                        scales: {
+                          x: {
+                            min: moment().subtract(7, 'days'),
+                            type: 'time',
+                            time: {
+                              unit: 'day',
+                            },
+                          },
+                        },
+                        plugins: {
+                          title: {
+                            display: true,
+                            text: '{{input.icon}}' + ' {{input.name}}',
+                          },
+                          colorschemes: {
+                            scheme: 'brewer.PastelOne4',
+                          },
+                        },
+                      },
+                      data: {
+                        datasets: datasets,
+                      },
+                    });
+                  </script>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function loadGraph(id, datasets) {
+    var ctx = document.getElementById(id).getContext('2d');
+    let chart = new Chart(ctx, {
+      type: 'bar',
+      options: {
+        scales: {
+          x: {
+            min: new Date('2022-11-05'),
+            type: 'time',
+            time: {
+              unit: 'day',
+            },
+          },
+        },
+      },
+      data: {
+        datasets: datasets,
+      },
+    });
+  }
+
+  function updateStartDate(date) {
+    var charts = document.querySelectorAll('*[id^="chart"]');
+    var end_date = moment(document.getElementById('end_date').value);
+
+    var start_date = moment(date);
+    if (end_date.diff(start_date, 'days') < 7) {
+      var end_date = start_date.clone();
+      end_date.add(7, 'days');
+
+      document.getElementById('end_date').value = end_date.format('YYYY-MM-DD');
+    }
+
+    charts.forEach((chart) => {
+      var chart = Chart.getChart(chart.id);
+      chart.options.scales.x.min = start_date;
+      chart.options.scales.x.max = end_date;
+
+      chart.update();
+    });
+  }
+
+  function updateEndDate(date) {
+    var charts = document.querySelectorAll('*[id^="chart"]');
+
+    var start_date = moment(document.getElementById('start_date').value);
+
+    var end_date = moment(date);
+
+    if (end_date.diff(start_date, 'days') < 7) {
+      start_date = end_date.clone();
+      start_date.subtract(7, 'days');
+      document.getElementById('start_date').value =
+        start_date.format('YYYY-MM-DD');
+    }
+    charts.forEach((chart) => {
+      var chart = Chart.getChart(chart.id);
+      chart.options.scales.x.min = start_date;
+      chart.options.scales.x.max = end_date;
+      chart.update();
+    });
+  }
+</script>

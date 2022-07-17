@@ -24,22 +24,22 @@ def index_date(date):
     
     tasks = BaseTask.query.all()
     
-    workers_pending = Worker.query.filter(~Worker.tasks.any(BaseTask.date == date)).all()
-    workers_done = Worker.query.filter(Worker.tasks.any(BaseTask.date == date)).all()
+    workers_pending = Worker.query.filter(~Worker.tasks.any(BaseTask.date == date)).order_by(Worker.num_worker).all()
+    workers_done = Worker.query.filter(Worker.tasks.any(BaseTask.date == date)).order_by(Worker.num_worker).all()
 
     
     return render_template('production.html', workers_pending=workers_pending, workers_done=workers_done, prev_date=(date - datetime.timedelta(1)).strftime('%Y-%m-%d'),  next_date=(date + datetime.timedelta(1)).strftime('%Y-%m-%d'), date=date.strftime('%Y-%m-%d'),config=config)
 
         
-@bp_production.route('/<date>/<int:worker_id>', methods=['GET','POST'])
+@bp_production.route('/<date>/post/<int:worker_id>', methods=['GET','POST'])
 def post_worker(worker_id, date):
     from .models.task import BaseTask
-    from .models.inputs import Weighing, Loose, Working
+    from .models.inputs import Weighing, Loose, Working, Number
 
     from .models.worker import Worker
     from main import config, db
     
- 
+    
     
     if request.method == 'POST':
         worker = Worker.query.filter_by(id=worker_id).first()
@@ -53,7 +53,7 @@ def post_worker(worker_id, date):
         
         for item in task['inputs']:
             if item['type'] == 'time':
-                task_obj.inputs.append(Working(hours=request.form.get('time')))
+                task_obj.inputs.append(Working(type=item['id'], hours=request.form.get(item['id'])))
             elif item['type'] == 'weight':
                 print(request.form)
                 task_obj.inputs.append(Weighing(type=item['id'],  
@@ -62,18 +62,36 @@ def post_worker(worker_id, date):
                                                    short_thin=request.form.get('{}[short][thin]'.format(item['id'])), 
                                                    short_thick=request.form.get('{}[short][thick]'.format(item['id']))))
             elif item['type'] == 'loose':
-                task_obj.inputs.append(Loose(weight=request.form.get(item['type'])))
+                task_obj.inputs.append(Loose(type=item['id'], weight=request.form.get(item['id'])))
+            elif item['type'] == 'number':
+                task_obj.inputs.append(Number(type=item['id'], number=request.form.get(item['id'])))
+                
             
         worker.tasks.append(task_obj)
         db.session.commit()
         
-        
     return redirect(url_for('production.index_date',date=date))
-    
-    
+
 
     
+@bp_production.route('/<date>/delete/<int:worker_id>', methods=['POST'])
+def delete_worker(worker_id, date):
+    from .models.task import BaseTask
+
+    from main import db
     
+    
+    task = BaseTask.query.filter_by(worker_id=worker_id, date=datetime.datetime.strptime(date, '%Y-%m-%d')).first()
+
+    
+    for input in task.inputs:
+        db.session.delete(input)
+
+    db.session.delete(task)
+    db.session.commit()
+    
+    return redirect(url_for('production.index_date', date=date))
+
     
 
     

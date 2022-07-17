@@ -52,9 +52,10 @@
           >
             <div id="worker_{{worker.id}}" class="card p-2 m-2">
               <div class="row justify-content-center align-items-center">
-                <div class="col-md-4">
-                  <div>💪🏻 {{worker.last_name}} {{worker.first_name}}</div>
+                <div class="col-md-6">
+                  💪🏻 {{worker.last_name}} {{worker.first_name}}
                 </div>
+                <div class="col-md-2">👨 {{worker.num_worker}}</div>
                 <div class="col-md-4">
                   <select
                     onchange='changeSelected(this.value, "{{worker.id}}", {{config | tojson}})'
@@ -79,29 +80,30 @@
           <div class="alert alert-success my-3" role="alert">Terminés</div>
 
           {% for worker in workers_done%}
-          <form method="POST">
-            <div id="worker_{{worker.id}}" class="card p-2 m-2">
-              <div class="row justify-content-center align-items-center">
-                <div class="col-md-4">
-                  <div>{{worker.first_name}} {{worker.last_name}}</div>
-                </div>
-                <div class="col-md-4">
-                  <select
-                    onchange='changeSelected(this.value, "{{worker.id}}", {{config | tojson}})'
-                    class="form-select"
-                    name="task"
-                    aria-label="Default select example"
-                    hidden
+          <div id="worker_{{worker.id}}" class="card p-2 m-2">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-4">
+                <form
+                  id="delete_worker_{{worker.id}}"
+                  action="{{url_for('production.delete_worker', date=date, worker_id=worker.id)}}"
+                  method="POST"
+                >
+                  <button
+                    form="delete_worker_{{worker.id}}"
+                    type="submit"
+                    class="btn btn-light"
                   >
-                    <option selected>Travail réalisé</option>
-                    {% for task in config.tasks %}
-                    <option value="{{task.id}}">{{task.name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
+                    <i class="bi bi-arrow-90deg-left"></i>
+                  </button>
+                </form>
               </div>
+
+              <div class="col-md-4">
+                <div>{{worker.first_name}} {{worker.last_name}}</div>
+              </div>
+              <div class="col-md-4">👨 {{worker.num_worker}}</div>
             </div>
-          </form>
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -138,15 +140,21 @@
         card.appendChild(card_div);
       }
 
-      function getInput(type) {
+      function getInput(type, id) {
         var input_casse = document.createElement("div");
 
         var input = document.createElement("input");
 
         input.setAttribute("type", "number");
         input.classList.add("form-control");
-        input.setAttribute("name", type);
-        input.setAttribute("step", "0.01");
+        input.setAttribute("name", id);
+        if (type == "time") {
+          input.setAttribute("step", "4");
+          input.setAttribute("max", "8");
+          input.setAttribute("min", "0");
+        } else {
+          input.setAttribute("step", "0.01");
+        }
         input.required = true;
         input_casse.appendChild(input);
         return input_casse;
@@ -167,21 +175,36 @@
 
         switch (element.type) {
           case "loose":
-            var el_body = createSimpleInput(element.type, element.unit);
+            var el_body = createSimpleInput(
+              element.type,
+              element.unit,
+              element.id
+            );
             break;
           case "weight":
             var el_body = createWeightInput(element.id);
 
             break;
+          case "number":
+            var el_body = createSimpleInput(
+              element.type,
+              element.unit,
+              element.id
+            );
+            break;
           case "time":
-            var el_body = createSimpleInput(element.type, element.unit);
+            var el_body = createSimpleInput(
+              element.type,
+              element.unit,
+              element.id
+            );
             break;
         }
         el_infos.appendChild(el_body);
         return el_infos;
       }
 
-      function createSimpleInput(type, unit) {
+      function createSimpleInput(type, unit, id) {
         var row = document.createElement("div");
         row.classList.add(
           "row",
@@ -196,7 +219,7 @@
         col_2.classList.add("col-md-6");
         col_2.classList.add("col-6");
 
-        var work = getInput(type);
+        var work = getInput(type, id);
         col_1.append(work);
         col_2.innerHTML = unit;
         row.appendChild(col_1);
@@ -220,7 +243,8 @@
             "justify-content-center",
             "border",
             "rounded",
-            "p-2"
+            "p-2",
+            "mt-2"
           );
           var span = document.createElement("span");
           span.classList.add("badge", "bg-primary");
@@ -238,7 +262,7 @@
             third_row_1.classList.add("col-md-6");
             var input1 = document.createElement("input");
             input1.setAttribute("type", "number");
-            input1.classList.add("form-control");
+            input1.classList.add("form-control", "mt-1");
             input1.setAttribute("placeholder", diameters[j]);
             input1.setAttribute("step", "0.01");
             input1.required = true;

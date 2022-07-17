@@ -9,9 +9,16 @@
                 {
                     "type": "time",
                     "id": "working_hours",
-                    "name": "Temps de travail",
+                    "name": "Temps travaillé",
                     "unit": "heures",
                     "icon": "⏰"
+                },
+                {
+                    "type": "number",
+                    "id": "fagot",
+                    "name": "Nombre de fagots",
+                    "unit": "fagots",
+                    "icon": "🌿"
                 },
                 {
                     "type": "weight",
@@ -24,6 +31,42 @@
         },
         {
             "id": "2",
+            "type": "fraisage",
+            "name": "Fraisage",
+            "icon": "🍓",
+            "inputs": [
+                {
+                    "type": "time",
+                    "id": "working_hours",
+                    "name": "Temps travaillé",
+                    "unit": "heures",
+                    "icon": "⏰"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount_current",
+                    "name": "Casse au fraisage",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount_cut",
+                    "name": "Casse à la coupe",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_coupe",
+                    "name": "Poids fraisé",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                }
+            ]
+        },
+        {
+            "id": "3",
             "casse": true,
             "type": "ecouvillonage",
             "name": "Écouvillonnage",
@@ -32,14 +75,21 @@
                 {
                     "type": "time",
                     "id": "working_hours",
-                    "name": "Temps de travail",
+                    "name": "Temps travaillé",
                     "unit": "heures",
                     "icon": "⏰"
                 },
                 {
                     "type": "loose",
-                    "id": "loose_amount",
-                    "name": "Casse",
+                    "id": "loose_amount_current",
+                    "name": "Casse à l écouvillonnage",
+                    "unit": "kg",
+                    "icon": "💔"
+                },
+                {
+                    "type": "loose",
+                    "id": "loose_amount_cut",
+                    "name": "Casse à la coupe",
                     "unit": "kg",
                     "icon": "💔"
                 },
@@ -53,7 +103,7 @@
             ]
         },
         {
-            "id": "3",
+            "id": "4",
             "type": "lavage",
             "casse": true,
             "name": "Lavage",
@@ -62,7 +112,7 @@
                 {
                     "type": "time",
                     "id": "working_hours",
-                    "name": "Temps de travail",
+                    "name": "Temps travaillé",
                     "unit": "heures",
                     "icon": "⏰"
                 },
@@ -83,7 +133,7 @@
             ]
         },
         {
-            "id": "4",
+            "id": "5",
             "type": "tri",
             "casse": false,
             "icon": "🔎",
@@ -92,28 +142,28 @@
                 {
                     "type": "time",
                     "id": "working_hours",
-                    "name": "Temps de travail",
+                    "name": "Temps travaillé",
                     "unit": "heures",
                     "icon": "⏰"
                 },
                 {
-                    "id": "poids_trie",
-                    "type": "weight",
-                    "name": "Poids trié",
+                    "type": "loose",
+                    "id": "loose_amount_cut",
+                    "name": "Casse",
                     "unit": "kg",
-                    "icon": "🏋️"
+                    "icon": "💔"
                 },
                 {
+                    "id": "poids_trie",
                     "type": "weight",
-                    "id": "poids_finition",
-                    "name": "Poids en finition",
+                    "name": "Poids envoyé à Marrakech",
                     "unit": "kg",
                     "icon": "🏋️"
                 }
             ]
         },
         {
-            "id": "5",
+            "id": "6",
             "type": "finition",
             "name": "Finition",
             "icon": "💎",
@@ -122,7 +172,7 @@
                 {
                     "type": "time",
                     "id": "working_hours",
-                    "name": "Temps de travail",
+                    "name": "Temps travaillé",
                     "unit": "heures",
                     "icon": "⏰"
                 },
@@ -135,8 +185,15 @@
                 },
                 {
                     "type": "weight",
-                    "id": "poids_termine",
-                    "name": "Poids terminé",
+                    "id": "poids_finition_fraisage",
+                    "name": "Poids envoyé en finition fraisage",
+                    "unit": "kg",
+                    "icon": "🏋️"
+                },
+                {
+                    "type": "weight",
+                    "id": "poids_finition_ecouvillonage",
+                    "name": "Poids envoyé en finition fraisage et écouvillonnage",
                     "unit": "kg",
                     "icon": "🏋️"
                 }

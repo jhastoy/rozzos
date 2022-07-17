@@ -1,0 +1,293 @@
+[
+    {
+        "id": "1",
+        "type": "coupe",
+        "name": "Coupe",
+        "icon": "✂️",
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰"
+            },
+            {
+                "type": "number",
+                "id": "fagot",
+                "name": "Nombre de fagots",
+                "unit": "fagots",
+                "icon": "🌿"
+            },
+            {
+                "type": "weight",
+                "id": "poids_coupe",
+                "name": "Poids coupé",
+                "unit": "kg",
+                "icon": "🏋️"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "type": "fraisage",
+        "name": "Fraisage",
+        "icon": "🍓",
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰"
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount_current",
+                "name": "Casse au fraisage",
+                "unit": "kg",
+                "icon": "💔"
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount_cut",
+                "name": "Casse à la coupe",
+                "unit": "kg",
+                "icon": "💔"
+            },
+            {
+                "type": "weight",
+                "id": "poids_coupe",
+                "name": "Poids fraisé",
+                "unit": "kg",
+                "icon": "🏋️"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "casse": True,
+        "type": "ecouvillonage",
+        "name": "Écouvillonnage",
+        "icon": "🎋",
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰",
+                "datasets": [
+                    {
+                        "label": "hours",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "hours",
+                                    "value": 4.0
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount_current",
+                "name": "Casse à lécouvillonnage",
+                "unit": "kg",
+                "icon": "💔",
+                "datasets": [
+                    {
+                        "label": "weight",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "weight",
+                                    "value": 1.22
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount_cut",
+                "name": "Casse à la coupe",
+                "unit": "kg",
+                "icon": "💔",
+                "datasets": [
+                    {
+                        "label": "weight",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "weight",
+                                    "value": 0.12
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "weight",
+                "id": "poids_ecouvilloné",
+                "name": "Poids écouvillé",
+                "unit": "kg",
+                "icon": "🏋️",
+                "datasets": [
+                    {
+                        "label": "long_thin",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "long_thin",
+                                    "value": 21.3
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "label": "long_thick",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "long_thick",
+                                    "value": 21.5
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "label": "short_thin",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "short_thin",
+                                    "value": 1.15
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "label": "short_thick",
+                        "data": [
+                            {
+                                "date": "2022-07-17",
+                                "value": {
+                                    "label": "short_thick",
+                                    "value": 23.5
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "type": "lavage",
+        "casse": True,
+        "name": "Lavage",
+        "icon": "💦",
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰"
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount",
+                "name": "Casse",
+                "unit": "kg",
+                "icon": "💔"
+            },
+            {
+                "type": "weight",
+                "id": "poids_lavé",
+                "name": "Poids lavé",
+                "unit": "kg",
+                "icon": "🏋️"
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "type": "tri",
+        "casse": False,
+        "icon": "🔎",
+        "name": "Tri qualité",
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰"
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount_cut",
+                "name": "Casse",
+                "unit": "kg",
+                "icon": "💔"
+            },
+            {
+                "id": "poids_trie",
+                "type": "weight",
+                "name": "Poids envoyé à Marrakech",
+                "unit": "kg",
+                "icon": "🏋️"
+            }
+        ]
+    },
+    {
+        "id": "6",
+        "type": "finition",
+        "name": "Finition",
+        "icon": "💎",
+        "casse": True,
+        "inputs": [
+            {
+                "type": "time",
+                "id": "working_hours",
+                "name": "Temps travaillé",
+                "unit": "heures",
+                "icon": "⏰"
+            },
+            {
+                "type": "loose",
+                "id": "loose_amount",
+                "name": "Casse",
+                "unit": "kg",
+                "icon": "💔"
+            },
+            {
+                "type": "weight",
+                "id": "poids_finition_fraisage",
+                "name": "Poids envoyé en finition fraisage",
+                "unit": "kg",
+                "icon": "🏋️"
+            },
+            {
+                "type": "weight",
+                "id": "poids_finition_ecouvillonage",
+                "name": "Poids envoyé en finition fraisage et écouvillonnage",
+                "unit": "kg",
+                "icon": "🏋️"
+            }
+        ]
+    }
+]
