@@ -17,7 +17,6 @@ def index():
             tasks_db = BaseTask.query.filter_by(
                 type=task['type']).order_by(BaseTask.date.desc()).all()
             for task_db in tasks_db:
-                print(task_db.inputs)
                 if task_db.date.strftime('%Y-%m-%d') not in [task.date.strftime('%Y-%m-%d') for task in final_tasks]:
                     local_task = BaseTask(type=task_db.type, date=task_db.date)
                     make_transient(task_db)
@@ -51,9 +50,4 @@ def index():
 
                     input['datasets'] = datasets
 
-        # if len(final_tasks) > 0:
-        #     print(final_tasks[0].inputs)
-        #task['data'] = [task.to_dict() for task in final_tasks]
-
-    print(config['tasks'])
     return render_template('stats.html', data=config['tasks'])
