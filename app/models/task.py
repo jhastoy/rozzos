@@ -17,10 +17,8 @@ class BaseTask(db.Model):
         assert isinstance(task, BaseTask)
         assert task.type == self.type
         assert task.date == self.date
-        print(len(task.inputs))
 
         for i, task_input in enumerate(task.inputs):
-            print(i)
             if task_input.type not in [task_input_yo.type for task_input_yo in self.inputs]:
                 self.inputs.append(task_input)
             else:

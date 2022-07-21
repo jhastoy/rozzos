@@ -51,16 +51,20 @@ class Weighing(Input):
         self.long_thick += input.long_thick
         self.short_thin += input.short_thin
         self.short_thick += input.short_thick
-
+        self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
+      
     def to_dict(
             self):
-
+        if not hasattr(self, 'total'):
+            self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
 
         return   [
+                {"label": "total", "value": self.total},
                 {"label": "long_thin", "value": self.long_thin},
                 {"label": "long_thick", "value": self.long_thick},
                 {"label": "short_thin", "value": self.short_thin},
-                {"label": "short_thick", "value": self.short_thick}
+                {"label": "short_thick", "value": self.short_thick},
+
             ]
 
         

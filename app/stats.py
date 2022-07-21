@@ -17,7 +17,6 @@ def index():
             tasks_db = BaseTask.query.filter_by(
                 type=task['type']).order_by(BaseTask.date.desc()).all()
             for task_db in tasks_db:
-                print(task_db.inputs)
                 if task_db.date.strftime('%Y-%m-%d') not in [task.date.strftime('%Y-%m-%d') for task in final_tasks]:
                     local_task = BaseTask(type=task_db.type, date=task_db.date)
                     make_transient(task_db)
@@ -35,21 +34,21 @@ def index():
 
                     local_inputs = [
                         local_input for local_input in local_task.inputs if local_input.type == input['id']]
-                    datasets = []
                     for local_input in local_inputs:
                         dict_inputs = local_input.to_dict()
                         for dict_input in dict_inputs:
-
-                            if dict_input['label'] not in [dataset['label'] for dataset in datasets]:
-                                datasets.append({'label': dict_input['label'], 'data': [
+                       
+                            if dict_input['label'] not in [dataset['label'] for dataset in input['datasets']]:
+                                input['datasets'].append({'label': dict_input['label'], 'data': [
                                                 {'x':  local_task.date.strftime('%Y-%m-%d'), 'y': dict_input['value']}]})
                             else:
-                                dataset = [
-                                    dataset for dataset in datasets if dataset['type'] == local_input.type][0]
-                                dataset['data'].append({'x':  local_task.date.strftime(
+                                dataset_id = [
+                                    i for i in range(0, len(input['datasets'])) if input['datasets'][i]['label'] == dict_input['label']][0]
+                                input['datasets'][dataset_id]['data'].append({'x':  local_task.date.strftime(
                                     '%Y-%m-%d'), 'y': dict_input['value']})
+                     
 
-                    input['datasets'] = datasets
+
 
         # if len(final_tasks) > 0:
         #     print(final_tasks[0].inputs)
