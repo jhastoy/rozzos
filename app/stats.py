@@ -50,9 +50,4 @@ def index():
 
 
 
-        # if len(final_tasks) > 0:
-        #     print(final_tasks[0].inputs)
-        #task['data'] = [task.to_dict() for task in final_tasks]
-
-    print(config['tasks'])
     return render_template('stats.html', data=config['tasks'])

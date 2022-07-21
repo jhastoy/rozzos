@@ -24,13 +24,12 @@ class Loose(Input):
         self.weight += input.weight
 
     def to_dict(self):
-        return  [
-                {
-                    "label": "weight",
-                    "value": self.weight
-                }
-            ]
-        
+        return [
+            {
+                "label": "weight",
+                "value": self.weight
+            }
+        ]
 
 
 class Weighing(Input):
@@ -67,7 +66,12 @@ class Weighing(Input):
 
             ]
 
-        
+        return [
+            {"label": "long_thin", "value": self.long_thin},
+            {"label": "long_thick", "value": self.long_thick},
+            {"label": "short_thin", "value": self.short_thin},
+            {"label": "short_thick", "value": self.short_thick}
+        ]
 
 
 class Working(Input):
@@ -86,7 +90,6 @@ class Working(Input):
 
     def to_dict(self):
         return [{"label": "hours", "value": self.hours}]
-        
 
 
 class Number(Input):
@@ -105,4 +108,3 @@ class Number(Input):
 
     def to_dict(self):
         return [{"label": "number", "value": self.number}]
-        

@@ -8,4 +8,4 @@ class Worker(db.Model):
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
     num_worker = db.Column(db.Integer, nullable=False)
-    tasks = db.relationship('BaseTask', backref='worker', lazy='select')
+    tasks = db.relationship('BaseTask', backref='worker')
