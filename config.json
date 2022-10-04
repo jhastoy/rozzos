@@ -1,4 +1,8 @@
 {
+    "short_thin_weight": 0.002,
+    "short_thick_weight": 0.004, 
+    "long_thin_weight": 0.0028,
+        "long_thick_weight": 0.004,
     "tasks": [
         {
             "id": "1",

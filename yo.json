@@ -11,15 +11,10 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": [
+                "data": [
                     {
                         "label": "hours",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 40.0
-                            }
-                        ]
+                        "value": 408.0
                     }
                 ]
             },
@@ -29,15 +24,10 @@
                 "name": "Nombre de fagots",
                 "unit": "fagots",
                 "icon": "🌿",
-                "datasets": [
+                "data": [
                     {
                         "label": "number",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 86.0
-                            }
-                        ]
+                        "value": 702.0
                     }
                 ]
             },
@@ -47,42 +37,35 @@
                 "name": "Poids coupé",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": [
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 258.86,
+                        "straws": 149870
+                    },
                     {
                         "label": "long_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 15.79
-                            }
-                        ]
+                        "value": 147.36,
+                        "percentage": 56.93,
+                        "straws": 52629
                     },
                     {
                         "label": "long_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 4.430000000000001
-                            }
-                        ]
+                        "value": 44.55,
+                        "percentage": 17.21,
+                        "straws": 11138
                     },
                     {
                         "label": "short_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 66.95,
+                        "percentage": 25.86,
+                        "straws": 33475
                     },
                     {
                         "label": "short_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     }
                 ]
             }
@@ -100,15 +83,10 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": [
+                "data": [
                     {
                         "label": "hours",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 16.0
-                            }
-                        ]
+                        "value": 104.0
                     }
                 ]
             },
@@ -118,15 +96,10 @@
                 "name": "Casse au fraisage",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": [
+                "data": [
                     {
                         "label": "weight",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 5.18
                     }
                 ]
             },
@@ -136,15 +109,10 @@
                 "name": "Casse à la coupe",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": [
+                "data": [
                     {
                         "label": "weight",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 3.9
                     }
                 ]
             },
@@ -154,42 +122,35 @@
                 "name": "Poids fraisé",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": [
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 37.48,
+                        "straws": 23848
+                    },
                     {
                         "label": "long_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 4.72
-                            }
-                        ]
+                        "value": 26.94,
+                        "percentage": 71.88,
+                        "straws": 9621
                     },
                     {
                         "label": "long_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 2.66,
+                        "percentage": 7.1,
+                        "straws": 665
                     },
                     {
                         "label": "short_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 7.88,
+                        "percentage": 21.02,
+                        "straws": 3940
                     },
                     {
                         "label": "short_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     }
                 ]
             }
@@ -208,15 +169,10 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": [
+                "data": [
                     {
                         "label": "hours",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 56.0
-                            }
-                        ]
+                        "value": 764.0
                     }
                 ]
             },
@@ -226,15 +182,10 @@
                 "name": "Casse à l écouvillonnage",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": [
+                "data": [
                     {
                         "label": "weight",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.19999999999999998
-                            }
-                        ]
+                        "value": 7.48
                     }
                 ]
             },
@@ -244,15 +195,10 @@
                 "name": "Casse à la coupe",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": [
+                "data": [
                     {
                         "label": "weight",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 4.28
-                            }
-                        ]
+                        "value": 26.00999999999999
                     }
                 ]
             },
@@ -262,42 +208,35 @@
                 "name": "Poids écouvillé",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": [
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 227.65,
+                        "straws": 145626
+                    },
                     {
                         "label": "long_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 12.870000000000001
-                            }
-                        ]
+                        "value": 177.97,
+                        "percentage": 78.18,
+                        "straws": 63561
                     },
                     {
                         "label": "long_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 7.960000000000001
-                            }
-                        ]
+                        "value": 25.34,
+                        "percentage": 11.13,
+                        "straws": 6335
                     },
                     {
                         "label": "short_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 4.74
-                            }
-                        ]
+                        "value": 24.34,
+                        "percentage": 10.69,
+                        "straws": 12170
                     },
                     {
                         "label": "short_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     }
                 ]
             }
@@ -316,7 +255,12 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": []
+                "data": [
+                    {
+                        "label": "hours",
+                        "value": 208.0
+                    }
+                ]
             },
             {
                 "type": "loose",
@@ -324,7 +268,12 @@
                 "name": "Casse",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": []
+                "data": [
+                    {
+                        "label": "weight",
+                        "value": 4.139999999999999
+                    }
+                ]
             },
             {
                 "type": "weight",
@@ -332,7 +281,37 @@
                 "name": "Poids lavé",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": []
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 178.77,
+                        "straws": 114236
+                    },
+                    {
+                        "label": "long_thin",
+                        "value": 143.53,
+                        "percentage": 80.29,
+                        "straws": 51261
+                    },
+                    {
+                        "label": "long_thick",
+                        "value": 23.62,
+                        "percentage": 13.21,
+                        "straws": 5905
+                    },
+                    {
+                        "label": "short_thin",
+                        "value": 11.62,
+                        "percentage": 6.5,
+                        "straws": 5810
+                    },
+                    {
+                        "label": "short_thick",
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
+                    }
+                ]
             }
         ]
     },
@@ -349,7 +328,12 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": []
+                "data": [
+                    {
+                        "label": "hours",
+                        "value": 8.0
+                    }
+                ]
             },
             {
                 "type": "loose",
@@ -357,15 +341,19 @@
                 "name": "Casse",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": []
+                "data": [
+                    {
+                        "label": "weight",
+                        "value": 0.0
+                    }
+                ]
             },
             {
                 "id": "poids_trie",
                 "type": "weight",
                 "name": "Poids envoyé à Marrakech",
                 "unit": "kg",
-                "icon": "🏋️",
-                "datasets": []
+                "icon": "🏋️"
             }
         ]
     },
@@ -382,15 +370,10 @@
                 "name": "Temps travaillé",
                 "unit": "heures",
                 "icon": "⏰",
-                "datasets": [
+                "data": [
                     {
                         "label": "hours",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 8.0
-                            }
-                        ]
+                        "value": 280.0
                     }
                 ]
             },
@@ -400,15 +383,10 @@
                 "name": "Casse",
                 "unit": "kg",
                 "icon": "💔",
-                "datasets": [
+                "data": [
                     {
                         "label": "weight",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 50.949999999999996
                     }
                 ]
             },
@@ -418,42 +396,35 @@
                 "name": "Poids envoyé en finition fraisage",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": [
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 224.55,
+                        "straws": 130352
+                    },
                     {
                         "label": "long_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 140.85,
+                        "percentage": 62.73,
+                        "straws": 50304
                     },
                     {
                         "label": "long_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 44.12,
+                        "percentage": 19.65,
+                        "straws": 11030
                     },
                     {
                         "label": "short_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 37.43,
+                        "percentage": 16.67,
+                        "straws": 18715
                     },
                     {
                         "label": "short_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 2.15,
+                        "percentage": 0.96,
+                        "straws": 538
                     }
                 ]
             },
@@ -463,42 +434,35 @@
                 "name": "Poids envoyé en finition fraisage et écouvillonnage",
                 "unit": "kg",
                 "icon": "🏋️",
-                "datasets": [
+                "data": [
+                    {
+                        "label": "total",
+                        "value": 6.89,
+                        "straws": 4921
+                    },
                     {
                         "label": "long_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 2.58
-                            }
-                        ]
+                        "value": 6.89,
+                        "percentage": 100.0,
+                        "straws": 2461
                     },
                     {
                         "label": "long_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     },
                     {
                         "label": "short_thin",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     },
                     {
                         "label": "short_thick",
-                        "data": [
-                            {
-                                "x": "2022-07-14",
-                                "y": 0.0
-                            }
-                        ]
+                        "value": 0.0,
+                        "percentage": 0.0,
+                        "straws": 0
                     }
                 ]
             }

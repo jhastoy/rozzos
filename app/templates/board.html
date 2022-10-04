@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  {% include 'head.html' %}
+
+  <body>
+    {% include 'nav_bar.html' %}
+    <div class="container-fluid ">
+      <div class="row justify-content-center">
+        <div class="container-fluid">
+          <div class="row">
+            <a
+              class="btn btn-primary"
+              href="{{url_for('board.home_day')}}"
+              role="button"
+              >Par jour</a
+            >
+            <a
+              class="btn btn-primary"
+              href="{{url_for('board.home_week')}}"
+              role="button"
+              >Par semaine</a
+            >
+
+            <a
+              class="btn btn-primary"
+              href="{{url_for('board.home_month')}}"
+              role="button"
+              >Par mois</a
+            >
+          </div>
+          <div class="row justify-content-center mt-2">
+            <div
+              class="col-md-4 col-4 d-flex justify-content-center align-content-center"
+            >
+              <form
+                class="d-flex justify-content-center align-content-center"
+                method="get"
+                id="prev"
+                action="{{ url_for(url, date1=date1_prev, date2=date2_prev ) }}"
+              >
+                <button type="submit" class="btn btn-light">
+                  <i class="bi bi-arrow-bar-left"></i>
+                </button>
+              </form>
+            </div>
+
+            <div
+              class="col-md-4 col-4 d-flex justify-content-center align-content-center"
+            >
+              <div class="alert alert-primary mb-0" role="alert">
+                Production du <b>{{date1}}</b> au <b>{{date2}}</b>
+              </div>
+            </div>
+            <div class="col-md-4 col-4 d-flex justify-content-center">
+              <form
+                class="d-flex justify-content-center align-content-center"
+                method="get"
+                action="{{ url_for(url, date1=date1_next, date2=date2_next ) }}"
+              >
+                <button type="submit" class="btn btn-light">
+                  <i class="bi bi-arrow-bar-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex row justify-content-center">
+      <div class="col-md-8">
+        <div class="row">
+          {% for task in data %}
+          <div class="card mt-2 p-4">
+            <h3>{{task.name}}</h3>
+            <div class="row">
+              <div class="col-md-6">
+                {% for input in task.inputs %} {% if input.type == 'number' %}
+                <div class="row">
+                  <div class="col-md-4 m-2">
+                    {% for input_data in input.data%}
+                    <div class="row">Fagots</div>
+                    <div
+                      class="d-flex row justify-content-center align-items-center"
+                    >
+                      <div class="alert alert-primary">
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.value }} fagots
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endif %} {% if input.type == 'weight' %}
+                <span class="badge bg-primary">{{input.name}}</span>
+
+                <div class="row">
+                  <div class="col-md-4 m-2">
+                    {% for input_data in input.data%} {% if input_data.label ==
+                    'short_thin'%}
+                    <div class="row">Courtes fines</div>
+                    <div
+                      class="d-flex row justify-content-center align-items-center"
+                    >
+                      <div
+                        percentage="{{ input_data.percentage }}"
+                        class="alert alert-primary weight"
+                      >
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          <b
+                            class="d-flex row justify-content-center align-items-center"
+                            >{{ input_data.percentage }} %</b
+                          >
+                        </div>
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.value }} kg
+                        </div>
+
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.straws }} pailles
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}{% endfor %} {% for input_data in input.data%}{%
+                    if input_data.label == 'short_thick'%}
+                    <div class="row">Courtes épaisses</div>
+                    <div
+                      class="d-flex row justify-content-center align-items-center"
+                    >
+                      <div
+                        percentage="{{ input_data.percentage }}"
+                        class="alert alert-primary yo"
+                      >
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          <b
+                            class="d-flex row justify-content-center align-items-center"
+                            >{{ input_data.percentage }} %</b
+                          >
+                        </div>
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.value }} kg
+                        </div>
+
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.straws }} pailles
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}{% endfor %}
+                  </div>
+                  <div class="col-md-4 m-2">
+                    {% for input_data in input.data%}{% if input_data.label ==
+                    'long_thin'%}
+                    <div class="row">Longues fines</div>
+                    <div
+                      class="d-flex row justify-content-center align-items-center"
+                    >
+                      <div
+                        percentage="{{ input_data.percentage }}"
+                        class="alert alert-primary weight"
+                      >
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          <b
+                            class="d-flex row justify-content-center align-items-center"
+                            >{{ input_data.percentage }} %</b
+                          >
+                        </div>
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.value }} kg
+                        </div>
+
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.straws }} pailles
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}{% endfor %} {% for input_data in input.data%}{%
+                    if input_data.label == 'long_thick'%}
+                    <div class="row">Longues épaisses</div>
+                    <div
+                      class="d-flex row justify-content-center align-items-center"
+                    >
+                      <div
+                        percentage="{{ input_data.percentage }}"
+                        class="alert alert-primary weight"
+                      >
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          <b
+                            class="d-flex row justify-content-center align-items-center"
+                            >{{ input_data.percentage }} %</b
+                          >
+                        </div>
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.value }} kg
+                        </div>
+
+                        <div
+                          class="d-flex row justify-content-center align-items-center"
+                        >
+                          {{ input_data.straws }} pailles
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}{% endfor %}
+                  </div>
+                </div>
+
+                {% endif %} {% endfor %}
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div>
+                      Production par heure
+                      <div class="alert alert-primary">
+                        {{task.data.weight_by_hour}} kg/h
+                      </div>
+                    </div>
+                    <div>
+                      Production par opérateur
+                      <div class="alert alert-primary">
+                        {{task.data.weight_by_operator}} kg/opérateur
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      Production par opérateur par heure
+                      <div class="alert alert-primary">
+                        {{task.data.weight_by_operator_by_hour}} kg/opérateur/h
+                      </div>
+                    </div>
+                    <div>
+                      Nombre d'opérateur(s)
+                      <div class="alert alert-primary">
+                        {{task.data.operators}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
+{% raw %}
+
+<script>
+  window.onload = function () {
+    var divs = document.getElementsByClassName('alert alert-primary weight');
+    console.log(divs);
+    for (let item of divs) {
+      item.style.backgroundColor = getColor(item.getAttribute('percentage'));
+
+      console.log(item.getAttribute('percentage'));
+    }
+  };
+
+  function getColor(value) {
+    //value from 0 to 1
+    var hue = ((value / 100) * 120).toString(10);
+    return ['hsl(', hue, ',100%,50%)'].join('');
+  }
+</script>
+{% endraw %}

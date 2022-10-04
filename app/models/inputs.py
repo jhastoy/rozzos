@@ -1,5 +1,5 @@
 from wsgiref.validate import InputWrapper
-from main import db
+from main import db, config
 
 
 class Input(db.Model):
@@ -51,22 +51,29 @@ class Weighing(Input):
         self.short_thin += input.short_thin
         self.short_thick += input.short_thick
         self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
-      
+
     def to_dict(
             self):
         if not hasattr(self, 'total'):
             self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
 
-        return   [
-                {"label": "total", "value": self.total},
-                {"label": "long_thin", "value": self.long_thin},
-                {"label": "long_thick", "value": self.long_thick},
-                {"label": "short_thin", "value": self.short_thin},
-                {"label": "short_thick", "value": self.short_thick},
+        return [
+            {"label": "total", "value": round(
+                self.total, 2), "straws": round(self.long_thick / config['long_thick_weight'] + self.long_thin / config['long_thin_weight'] + self.short_thin / config['short_thin_weight'] + self.long_thin / config['long_thin_weight'])},
+            {"label": "long_thin", "value": round(self.long_thin, 2), 'percentage': round(
+                (self.long_thin / self.total) * 100 if self.total != 0 else 0, 2),
+             'straws': round(self.long_thin / config['long_thin_weight'])},
+            {"label": "long_thick", "value": round(self.long_thick, 2),
+             'percentage': round((self.long_thick / self.total) * 100 if self.total != 0 else 0, 2),
+             'straws': round(self.long_thick / config['long_thick_weight'])},
+            {"label": "short_thin", "value": round(self.short_thin, 2),
+             'percentage': round((self.short_thin / self.total) * 100 if self.total != 0 else 0, 2),
+             'straws': round(self.short_thin / config['short_thin_weight'])},
+            {"label": "short_thick", "value": round(self.short_thick , 2),
+             'percentage': round((self.short_thick / self.total) * 100 if self.total != 0 else 0, 2),
+             'straws': round(self.short_thick / config['short_thick_weight'])},
 
-            ]
-
-       
+        ]
 
 
 class Working(Input):

@@ -19,11 +19,13 @@ from app.production import bp_production
 from app.index import bp_index
 from app.workers import bp_workers
 from app.stats import bp_stats
+from app.board import bp_board
 
 app.register_blueprint(bp_production)
 app.register_blueprint(bp_index)
 app.register_blueprint(bp_workers)
 app.register_blueprint(bp_stats)
+app.register_blueprint(bp_board)
 
 with open('config.json') as config_file:
     config = json.load(config_file)
@@ -38,4 +40,4 @@ migrate = Migrate(app, db)
 
  
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
