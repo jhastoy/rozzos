@@ -137,7 +137,7 @@
                     >
                       <div
                         percentage="{{ input_data.percentage }}"
-                        class="alert alert-primary yo"
+                        class="alert alert-primary weight"
                       >
                         <div
                           class="d-flex row justify-content-center align-items-center"
@@ -260,6 +260,15 @@
                         {{task.data.operators}}
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class='row'>
+                  <div class='col-md-12'>
+                    {% for worker in task.workers%}
+                    <div class='row mb-1'>
+                    <span class="badge bg-secondary"> 💪🏻 {{worker.first_name}} {{worker.last_name}}</span> Poids par jour : {{worker.weight_by_day}} kg/j
+                    </div>
+                    {% endfor %}
                   </div>
                 </div>
               </div>

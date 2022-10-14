@@ -52,6 +52,10 @@ class Weighing(Input):
         self.short_thick += input.short_thick
         self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
 
+    def init_total(self):
+        self.total = self.long_thin + self.long_thick + self.short_thin + self.short_thick
+
+    
     def to_dict(
             self):
         if not hasattr(self, 'total'):
@@ -107,6 +111,7 @@ class Number(Input):
         assert input.type == self.type
 
         self.number += input.number
+    
 
     def to_dict(self):
         return [{"label": "number", "value": self.number}]
