@@ -262,11 +262,15 @@
                     </div>
                   </div>
                 </div>
-                <div class='row'>
+                <div class='d-flex row justify-content-center'>
+                  <div class="d-flex row justify-content-center mb-2"> <span class="badge bg-dark">🌈 Classement 🌈</span>
+</div>
                   <div class='col-md-12'>
                     {% for worker in task.workers%}
                     <div class='row mb-1'>
-                    <span class="badge bg-secondary"> 💪🏻 {{worker.first_name}} {{worker.last_name}}</span> Poids par jour : {{worker.weight_by_day}} kg/j
+                      
+
+                    <span class="badge bg-light text-dark"><div class='d-flex col justify-content-between'><span class="badge bg-primary"> {{loop.index}}</span> <div>💪🏻 {{worker.num_worker}} - {{worker.first_name}} {{worker.last_name}}</div><div>{{worker.weight_by_day}} kg/j</div></div> </span> 
                     </div>
                     {% endfor %}
                   </div>
