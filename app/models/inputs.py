@@ -17,6 +17,9 @@ class Loose(Input):
     type = db.Column(db.String(80), nullable=False)
     weight = db.Column(db.Float, nullable=True)
 
+    def init(self):
+        self.weight = 0
+    
     def add(self, input):
         assert isinstance(input, Loose)
         assert input.type == self.type
@@ -42,10 +45,18 @@ class Weighing(Input):
     short_thin = db.Column(db.Float, nullable=False)
     short_thick = db.Column(db.Float, nullable=False)
 
+    
+    def init(self):
+        self.long_thin = 0
+        self.long_thick = 0
+        self.short_thin = 0
+        self.short_thick = 0
+        
+    
     def add(self, input):
         assert isinstance(input, Weighing)
         assert input.type == self.type
-
+ 
         self.long_thin += input.long_thin
         self.long_thick += input.long_thick
         self.short_thin += input.short_thin
@@ -88,6 +99,9 @@ class Working(Input):
 
     hours = db.Column(db.Float, nullable=False)
 
+    def init(self):
+        self.hours = 0
+        
     def add(self, input):
         assert isinstance(input, Working)
         assert input.type == self.type
@@ -106,6 +120,9 @@ class Number(Input):
 
     number = db.Column(db.Float, nullable=False)
 
+    def init(self):
+        self.number = 0
+        
     def add(self, input):
         assert isinstance(input, Number)
         assert input.type == self.type

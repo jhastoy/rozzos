@@ -23,9 +23,7 @@ def index():
 def delete(worker_id):
     from .models import Worker
     from main import db
-    print(worker_id)
     worker = Worker.query.filter_by(id=worker_id).first()
-    print(worker)
     db.session.delete(worker)
     db.session.commit()
     

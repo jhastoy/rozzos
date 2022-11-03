@@ -4,7 +4,7 @@ import datetime
 import json
 from flask import Blueprint, Flask, jsonify, request, flash, session, url_for, redirect, render_template
 from sqlalchemy import false
-from sqlalchemy.orm.session import make_transient
+from sqlalchemy.orm.session import make_transient, make_transient_to_detached
 import calendar
 
 
@@ -175,35 +175,33 @@ def get_data(date1, date2):
     config = deepcopy(config)
     
     with db.session.no_autoflush:
-        for task in config['tasks']:
-
-            tasks_db = BaseTask.query.filter(
-                BaseTask.date.between(date1, date2)).filter_by(
-                type=task['type']).all()
-                
+        for task in config['tasks']:            
                 
             workers = Worker.query.outerjoin(BaseTask).filter(
                 BaseTask.date.between(date1, date2)).filter_by(
                 type=task['type']).all()
             worker_dicts = []
-            for worker in workers:
+            for i, worker in enumerate(workers):
                 tasks_worker = BaseTask.query.filter(
                     BaseTask.date.between(date1, date2)).filter_by(worker_id=worker.id, type=task['type']).all()
                 total_task_worker = BaseTask(type=task['type'], workers={}, inputs=[])
+                make_transient(total_task_worker)
                 for task_worker in tasks_worker:
                     make_transient(task_worker)
                     total_task_worker.add(task_worker, period=True)
                 worker_dicts.append(
                     {'first_name': worker.first_name, 'last_name': worker.last_name, 'num_worker': worker.num_worker, 'weight_by_hour': total_task_worker.to_dict(period=True)['data']['weight_by_hour'], 'weight_by_day': total_task_worker.to_dict(period=True)['data']['weight_by_hour'] * 8})
                 
-                print(total_task_worker.to_dict(period=True))
             worker_dicts.sort(key=lambda x: x['weight_by_hour'], reverse=True)
                 
                 
                 
             total_task = BaseTask(type=task['type'], workers={}, inputs=[])
+            make_transient(total_task)
+            tasks_db = BaseTask.query.filter(
+                BaseTask.date.between(date1, date2)).filter_by(
+                type=task['type']).all()
             for task_db in tasks_db:
-                make_transient(task_db)
                 total_task.add(task_db, period=True)
             task['data'] = total_task.to_dict(period=True)['data']
             task['workers'] = worker_dicts
